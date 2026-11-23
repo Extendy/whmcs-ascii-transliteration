@@ -33,12 +33,14 @@ if (!defined('WHMCS'))
  * Delegates conversion to whmcs_ascii_transliterate() and returns the
  * original input if the conversion fails.
  *
- * @param string $string The text supplied by WHMCS for transliteration.
+ * @param string|null $string The text supplied by WHMCS for transliteration.
  * @return string The converted text, or the original input on failure.
  * @see https://docs.whmcs.com/9-1/customization/transliteration/ WHMCS 9.1 custom transliteration documentation.
  */
-function hook_transliterate(string $string): string
+function hook_transliterate(?string $string): string
 {
+    $string ??= '';
+
     return whmcs_ascii_transliterate($string) ?? $string;
 }
 
